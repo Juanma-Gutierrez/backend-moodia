@@ -17,7 +17,8 @@ class EmploymentSeeder extends Seeder
             ['idEmployment' => 2, 'employment' => 'Trabajador por cuenta propia', 'created_at' => NOW(), 'updated_at' => NOW()],
             ['idEmployment' => 3, 'employment' => 'Trabajador por cuenta ajena', 'created_at' => NOW(), 'updated_at' => NOW()],
             ['idEmployment' => 4, 'employment' => 'Desempleado', 'created_at' => NOW(), 'updated_at' => NOW()],
-            ['idEmployment' => 5, 'employment' => 'Prefiero no decirlo', 'created_at' => NOW(), 'updated_at' => NOW()],
+            ['idEmployment' => 5, 'employment' => 'Jubilado', 'created_at' => NOW(), 'updated_at' => NOW()],
+            ['idEmployment' => 6, 'employment' => 'Prefiero no decirlo', 'created_at' => NOW(), 'updated_at' => NOW()],
         ]);
     }
 }
