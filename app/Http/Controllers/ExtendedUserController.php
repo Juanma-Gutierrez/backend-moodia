@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\ExtendedUser;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Role;
 
 class ExtendedUserController extends Controller
 {
@@ -42,6 +43,7 @@ class ExtendedUserController extends Controller
 
     // Valida los datos de entrada
     $validated = $request->validate([
+      'idExtendedUser' => 'nullable|integer',
       'birthDate' => 'nullable|date',
       'idCivilStatus' => 'nullable|integer',
       'idGenre' => 'nullable|integer',
@@ -50,7 +52,7 @@ class ExtendedUserController extends Controller
     ]);
 
     // Encuentra el registro de ExtendedUser del usuario autenticado
-    $extendedUser = ExtendedUser::where('id', $user->id)->first();
+    $extendedUser = ExtendedUser::where('idExtendedUser', $user->idExtendedUser)->first();
 
     if (!$extendedUser) {
       return response()->json(['error' => 'No se encontró la información extendida del usuario'], 404);
@@ -63,15 +65,36 @@ class ExtendedUserController extends Controller
   }
 
   // Obtener la información extendida de un usuario
-  public function show($id)
+  public function show($idExtendedUser)
   {
     // Encuentra el registro de ExtendedUser por ID
-    $extendedUser = ExtendedUser::where('id', $id)->first();
+    $extendedUser = ExtendedUser::where('idExtendedUser', $idExtendedUser)->first();
 
     if (!$extendedUser) {
-      return response()->json(['error' => 'No se encontró la información extendida del usuario'], 404);
+      return response()->json(['error' => "No se ha encontrado la informacion extendida del usuario {$idExtendedUser}"], 404);
     }
 
     return response()->json(['success' => true, 'data' => $extendedUser]);
+  }
+
+  // Obtener la información extendida de un usuario
+  public function getRole($idExtendedUser)
+  {
+    // // Encuentra el registro de ExtendedUser por ID
+    $extendedUser = ExtendedUser::where('idExtendedUser', $idExtendedUser)->first();
+
+    if (!$extendedUser) {
+      return response()->json(['error' => "No se ha encontrado la información extendida del usuario {$idExtendedUser}"], 404);
+    }
+
+    // Obtiene el rol asociado al idRole del ExtendedUser
+    $role = Role::where('idRole', $extendedUser->idRole)->first();
+
+
+    if (!$role) {
+      return response()->json(['error' => "No se ha encontrado el rol del usuario {$idExtendedUser}"], 404);
+    }
+
+    return response()->json(['success' => true, 'data' => $role["role"]]);
   }
 }

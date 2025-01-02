@@ -23,4 +23,5 @@ Route::group([
   Route::post('/create', [ExtendedUserController::class, 'create'])->name('extended_user.create');
   Route::post('/update', [ExtendedUserController::class, 'update'])->name('extended_user.update');
   Route::post('/{id}', [ExtendedUserController::class, 'show'])->name('extended_user.show');
+  Route::post('/getRole/{id}', [ExtendedUserController::class, 'getRole'])->name('extended_user.getRole');
 });
