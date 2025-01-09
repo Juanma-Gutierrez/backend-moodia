@@ -10,7 +10,7 @@ class GenreController extends Controller
 {
   public function getGenres(Request $request): JsonResponse
   {
-    $genres = Genre::select('idGenre', 'genre')->get();
-      return response()->json($genres);
+    $data = Genre::select('idGenre', 'genre')->get();
+      return response()->json($data);
   }
 }

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CivilStatusController;
 use App\Http\Controllers\ExtendedUserController;
 use App\Http\Controllers\GenreController;
 
@@ -33,4 +34,12 @@ Route::group([
   'prefix' => 'genre'
 ], function ($router) {
   Route::post('/get', [GenreController::class, 'getGenres'])->name('genre.get');
+});
+
+// Rutas para CivilStatus
+Route::group([
+  'middleware' => 'api',
+  'prefix' => 'civil_status'
+], function ($router) {
+  Route::post('/get', [CivilStatusController::class, 'getCivilStatus'])->name('civilStatus.get');
 });
