@@ -3,16 +3,17 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ExtendedUserController;
+use App\Http\Controllers\GenreController;
 
 // Rutas para Login y Registro
 Route::group([
-    'middleware' => 'api',
-    'prefix' => 'auth'
+  'middleware' => 'api',
+  'prefix' => 'auth'
 ], function ($router) {
-    Route::post('/register', [AuthController::class, 'register'])->name('register');
-    Route::post('/login', [AuthController::class, 'login'])->name('login');
-    Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:api')->name('logout');
-    Route::post('/me', [AuthController::class, 'me'])->middleware('auth:api')->name('me');
+  Route::post('/register', [AuthController::class, 'register'])->name('register');
+  Route::post('/login', [AuthController::class, 'login'])->name('login');
+  Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:api')->name('logout');
+  Route::post('/me', [AuthController::class, 'me'])->middleware('auth:api')->name('me');
 });
 
 // Rutas para ExtendedUser
@@ -24,4 +25,12 @@ Route::group([
   Route::post('/update', [ExtendedUserController::class, 'update'])->name('extended_user.update');
   Route::post('/{id}', [ExtendedUserController::class, 'show'])->name('extended_user.show');
   Route::post('/getRole/{id}', [ExtendedUserController::class, 'getRole'])->name('extended_user.getRole');
+});
+
+// Rutas para Genre
+Route::group([
+  'middleware' => 'api',
+  'prefix' => 'genre'
+], function ($router) {
+  Route::post('/get', [GenreController::class, 'getGenres'])->name('genre.get');
 });
