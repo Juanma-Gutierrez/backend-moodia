@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CivilStatusController;
+use App\Http\Controllers\EmploymentController;
 use App\Http\Controllers\ExtendedUserController;
 use App\Http\Controllers\GenreController;
 
@@ -42,4 +43,12 @@ Route::group([
   'prefix' => 'civil_status'
 ], function ($router) {
   Route::post('/get', [CivilStatusController::class, 'getCivilStatus'])->name('civilStatus.get');
+});
+
+// Rutas para Employment
+Route::group([
+  'middleware' => 'api',
+  'prefix' => 'employment'
+], function ($router) {
+  Route::post('/get', [EmploymentController::class, 'getEmployment'])->name('employment.get');
 });
