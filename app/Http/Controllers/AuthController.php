@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Constants\ResponseMessages;
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
@@ -46,7 +47,7 @@ class AuthController extends Controller
         $credentials = request(['email', 'password']);
 
         if (!$token = auth()->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            return response()->json(['error' => ResponseMessages::UNAUTHORIZED], 401);
         }
 
         return $this->respondWithToken($token);
@@ -71,7 +72,7 @@ class AuthController extends Controller
     {
         auth()->logout();
 
-        return response()->json(['message' => 'Successfully logged out']);
+        return response()->json(['message' => ResponseMessages::LOGOUT_SUCCESS]);
     }
 
     /**
