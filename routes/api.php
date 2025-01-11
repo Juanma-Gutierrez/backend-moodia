@@ -6,6 +6,7 @@ use App\Http\Controllers\CivilStatusController;
 use App\Http\Controllers\EmploymentController;
 use App\Http\Controllers\ExtendedUserController;
 use App\Http\Controllers\GenreController;
+use App\Http\Controllers\CategoryController;
 
 // Rutas para Login y Registro
 Route::group([
@@ -51,4 +52,12 @@ Route::group([
   'prefix' => 'employment'
 ], function ($router) {
   Route::post('/get', [EmploymentController::class, 'getEmployment'])->name('employment.get');
+});
+
+// Rutas para Category
+Route::group([
+  'middleware' => 'api',
+  'prefix' => 'category'
+], function ($router) {
+  Route::post('/get', [CategoryController::class, 'getCategory'])->name('category.get');
 });
