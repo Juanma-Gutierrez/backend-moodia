@@ -7,6 +7,7 @@ use App\Http\Controllers\EmploymentController;
 use App\Http\Controllers\ExtendedUserController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PostController;
 
 // Rutas para Login y Registro
 Route::group([
@@ -60,4 +61,24 @@ Route::group([
   'prefix' => 'category'
 ], function ($router) {
   Route::post('/get', [CategoryController::class, 'getCategory'])->name('category.get');
+});
+
+// Rutas para Post
+Route::group([
+  'middleware' => 'auth:api',
+  'prefix' => 'post'
+], function ($router) {
+  Route::get('/list', [PostController::class, 'index'])->name('post.list');
+  Route::post('/create', [PostController::class, 'store'])->name('post.create');
+  Route::get('/show/{id}', [PostController::class, 'show'])->name('post.show');
+  Route::put('/update/{id}', [PostController::class, 'update'])->name('post.update');
+  Route::delete('/delete/{id}', [PostController::class, 'destroy'])->name('post.delete');
+});
+
+// Rutas para Post - Solo para Administradores // TODO PENDIENTE DE IMPLEMENTAR
+Route::group([
+  'middleware' => ['auth:api', 'role:Administrador'],
+  'prefix' => 'post'
+], function ($router) {
+  Route::get('/admin/all', [PostController::class, 'getAllPosts'])->name('post.admin.all');
 });
