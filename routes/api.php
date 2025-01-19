@@ -76,6 +76,9 @@ Route::group([
 });
 
 // Rutas para Post - Solo para Administradores // TODO PENDIENTE DE IMPLEMENTAR
+// Este era el código con el que obtenía todos los posts
+//     $posts = Post::all();
+// return response()->json($posts);
 Route::group([
   'middleware' => ['auth:api', 'role:Administrador'],
   'prefix' => 'post'

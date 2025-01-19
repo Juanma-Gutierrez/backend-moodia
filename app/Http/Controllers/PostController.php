@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -12,7 +13,11 @@ class PostController extends Controller
    */
   public function index()
   {
-    $posts = Post::all();
+    $user = Auth::user();
+    if (!$user) {
+      return response()->json(['message' => 'Usuario no autenticado'], 401);
+    }
+    $posts = Post::where('idExtendedUser', $user->id)->get();
     return response()->json($posts);
   }
 
