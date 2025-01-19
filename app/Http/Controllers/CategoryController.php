@@ -9,21 +9,20 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+  protected $resource = "category";
+
   public function getCategory(Request $request): JsonResponse
   {
-    $resource = "category";
     try {
       $data = Category::select('idCategory', 'name')->get();
       return response()->json([
-        'success' => true,
-        'message' => ResponseMessages::SUCCESS_FETCHED . $resource,
-        'data' => $data,
+        ResponseMessages::RESPONSE_MESSAGE => ResponseMessages::SUCCESS_FETCHED . $this->resource,
+        ResponseMessages::RESPONSE_DATA => $data,
       ], 200);
     } catch (\Exception $e) {
       return response()->json([
-        'success' => false,
-        'message' => ResponseMessages::ERROR_FETCHING . $resource,
-        'error' => $e->getMessage(),
+        ResponseMessages::RESPONSE_MESSAGE => ResponseMessages::ERROR_FETCHING . $this->resource,
+        ResponseMessages::RESPONSE_ERROR => $e->getMessage(),
       ], 500);
     }
   }

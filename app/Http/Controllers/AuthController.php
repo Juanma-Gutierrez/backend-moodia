@@ -11,82 +11,86 @@ use Illuminate\Support\Facades\Validator;
 class AuthController extends Controller
 {
 
-    /**
-     * Register a User.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function register(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|confirmed|min:8',
-        ]);
+  /**
+   * Register a User.
+   *
+   * @return \Illuminate\Http\JsonResponse
+   */
+  public function register(Request $request)
+  {
+    $validator = Validator::make($request->all(), [
+      'name' => 'required',
+      'email' => 'required|email|unique:users',
+      'password' => 'required|confirmed|min:8',
+    ]);
 
-        if ($validator->fails()) {
-            return response()->json($validator->errors()->toJson(), 400);
-        }
-
-        $user = new User;
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = bcrypt($request->password);
-        $user->save();
-
-        return response()->json($user, 201);
+    if ($validator->fails()) {
+      return response()->json($validator->errors()->toJson(), 400);
     }
 
-    /**
-     * Get a JWT via given credentials.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function login()
-    {
-        $credentials = request(['email', 'password']);
+    $user = new User;
+    $user->name = $request->name;
+    $user->email = $request->email;
+    $user->password = bcrypt($request->password);
+    $user->save();
 
-        if (!$token = auth()->attempt($credentials)) {
-            return response()->json(['error' => ResponseMessages::UNAUTHORIZED], 401);
-        }
+    return response()->json($user, 201);
+  }
 
-        return $this->respondWithToken($token);
+  /**
+   * Get a JWT via given credentials.
+   *
+   * @return \Illuminate\Http\JsonResponse
+   */
+  public function login()
+  {
+    $credentials = request(['email', 'password']);
+
+    if (!$token = auth()->attempt($credentials)) {
+      return response()->json([
+        ResponseMessages::RESPONSE_ERROR => ResponseMessages::UNAUTHORIZED
+      ], 401);
     }
 
-    /**
-     * Get the authenticated User.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function me()
-    {
-        return response()->json(auth()->user());
-    }
+    return $this->respondWithToken($token);
+  }
 
-    /**
-     * Log the user out (Invalidate the token).
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function logout()
-    {
-        auth()->logout();
+  /**
+   * Get the authenticated User.
+   *
+   * @return \Illuminate\Http\JsonResponse
+   */
+  public function me()
+  {
+    return response()->json(auth()->user());
+  }
 
-        return response()->json(['message' => ResponseMessages::LOGOUT_SUCCESS]);
-    }
+  /**
+   * Log the user out (Invalidate the token).
+   *
+   * @return \Illuminate\Http\JsonResponse
+   */
+  public function logout()
+  {
+    auth()->logout();
 
-    /**
-     * Get the token array structure.
-     *
-     * @param  string $token
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    protected function respondWithToken($token)
-    {
-        return response()->json([
-            'access_token' => $token,
-            'token_type' => 'bearer',
-        ]);
-    }
+    return response()->json([
+      ResponseMessages::RESPONSE_MESSAGE => ResponseMessages::LOGOUT_SUCCESS
+    ]);
+  }
+
+  /**
+   * Get the token array structure.
+   *
+   * @param  string $token
+   *
+   * @return \Illuminate\Http\JsonResponse
+   */
+  protected function respondWithToken($token)
+  {
+    return response()->json([
+      'access_token' => $token,
+      'token_type' => 'bearer',
+    ]);
+  }
 }
