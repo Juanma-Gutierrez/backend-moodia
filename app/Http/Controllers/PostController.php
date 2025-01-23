@@ -27,6 +27,7 @@ class PostController extends Controller
       }
 
       $posts = Post::where('idExtendedUser', $user->id)
+        ->with('categories:idCategory')
         ->orderBy('created_at', 'desc')
         ->get();
 

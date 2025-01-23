@@ -24,4 +24,8 @@ class Post extends Model
   {
     return $this->belongsTo(ExtendedUser::class, 'idExtendedUser', 'id');
   }
+  public function categories()
+  {
+    return $this->belongsToMany(Category::class, 'has', 'idPost', 'idCategory');
+  }
 }
