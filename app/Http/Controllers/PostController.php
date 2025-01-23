@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
 use App\Constants\ResponseMessages;
+use App\Models\HasCategory;
 
 class PostController extends Controller
 {
@@ -52,9 +54,19 @@ class PostController extends Controller
         'creationDate' => 'required|date',
         'score' => 'required|integer',
         'idExtendedUser' => 'required|integer|exists:extended_user,idExtendedUser',
+        'category' => 'nullable|array',
       ]);
 
       $post = Post::create($validatedData);
+
+      foreach ($validatedData['category'] as $categoryId) {
+        HasCategory::create([
+          'idCategory' => $categoryId,
+          'idPost' => $post->idPost,
+          'created_at' => now(),
+          'updated_at' => now(),
+        ]);
+      }
 
       return response()->json([
         ResponseMessages::RESPONSE_MESSAGE => ResponseMessages::SUCCESS_CREATED . $this->resource,
