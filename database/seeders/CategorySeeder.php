@@ -13,13 +13,13 @@ class CategorySeeder extends Seeder
     public function run()
     {
         DB::table('category')->insert([
-            ['idCategory' => 0, 'name' => 'Familia', 'creationDate' => NOW(), 'created_at' => NOW(), 'updated_at' => NOW()],
-            ['idCategory' => 1, 'name' => 'Amigos', 'creationDate' => NOW(), 'created_at' => NOW(), 'updated_at' => NOW()],
-            ['idCategory' => 2, 'name' => 'Deporte', 'creationDate' => NOW(), 'created_at' => NOW(), 'updated_at' => NOW()],
-            ['idCategory' => 3, 'name' => 'Estudios', 'creationDate' => NOW(), 'created_at' => NOW(), 'updated_at' => NOW()],
-            ['idCategory' => 4, 'name' => 'Trabajo', 'creationDate' => NOW(), 'created_at' => NOW(), 'updated_at' => NOW()],
-            ['idCategory' => 5, 'name' => 'Hobby', 'creationDate' => NOW(), 'created_at' => NOW(), 'updated_at' => NOW()],
-            ['idCategory' => 6, 'name' => 'Relax', 'creationDate' => NOW(), 'created_at' => NOW(), 'updated_at' => NOW()],
+            ['idCategory' => 1, 'name' => 'Familia', 'created_at' => NOW(), 'updated_at' => NOW()],
+            ['idCategory' => 2, 'name' => 'Amigos', 'created_at' => NOW(), 'updated_at' => NOW()],
+            ['idCategory' => 3, 'name' => 'Deporte', 'created_at' => NOW(), 'updated_at' => NOW()],
+            ['idCategory' => 4, 'name' => 'Estudios', 'created_at' => NOW(), 'updated_at' => NOW()],
+            ['idCategory' => 5, 'name' => 'Trabajo', 'created_at' => NOW(), 'updated_at' => NOW()],
+            ['idCategory' => 6, 'name' => 'Hobby', 'created_at' => NOW(), 'updated_at' => NOW()],
+            ['idCategory' => 7, 'name' => 'Relax', 'created_at' => NOW(), 'updated_at' => NOW()],
         ]);
     }
 }

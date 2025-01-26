@@ -14,7 +14,6 @@ class Post extends Model
   protected $fillable = [
     'title',
     'message',
-    'creationDate',
     'score',
     'idExtendedUser',
   ];

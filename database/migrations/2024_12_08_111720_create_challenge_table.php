@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id('idChallenge');
             $table->string('title', 255);
             $table->text('message');
-            $table->date('creationDate');
             $table->unsignedBigInteger('idCategory')->nullable();
             $table->foreign('idCategory')->references('idCategory')->on('category');
             $table->timestamps();

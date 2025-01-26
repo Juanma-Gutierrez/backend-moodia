@@ -9,10 +9,12 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
-        Schema::create('extended_users', function (Blueprint $table) {
-            $table->id();
+        Schema::create('employment', function (Blueprint $table) {
+            $table->id('idEmployment');
+            $table->string('employment', 100);
+            $table->unsignedBigInteger('idExtendedUser')->nullable();
             $table->timestamps();
         });
     }
@@ -22,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('extended_users');
+        Schema::dropIfExists('employment');
     }
 };

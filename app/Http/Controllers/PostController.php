@@ -16,15 +16,18 @@ class PostController extends Controller
   /**
    * Muestra una lista de todos los posts.
    */
-  public function index()
+  public function list()
   {
     try {
       $user = Auth::user();
+      Log::debug("ENTRA***");
       if (!$user) {
+        Log::debug("NO HAY USUARIO ***");
         return response()->json([
           ResponseMessages::RESPONSE_MESSAGE => ResponseMessages::ERROR_AUTHENTICATION,
         ], 401);
       }
+      Log::debug("DEVUELVE POSTS ***");
 
       $posts = Post::where('idExtendedUser', $user->id)
         ->with('categories:idCategory')
@@ -48,11 +51,11 @@ class PostController extends Controller
    */
   public function store(Request $request)
   {
+    Log::debug($request);
     try {
       $validatedData = $request->validate([
         'title' => 'required|string|max:255',
         'message' => 'required|string',
-        'creationDate' => 'required|date',
         'score' => 'required|integer',
         'idExtendedUser' => 'required|integer|exists:extended_user,idExtendedUser',
         'category' => 'nullable|array',
@@ -122,7 +125,6 @@ class PostController extends Controller
       $validatedData = $request->validate([
         'title' => 'sometimes|required|string|max:255',
         'message' => 'sometimes|required|string',
-        'creationDate' => 'sometimes|required|date',
         'score' => 'sometimes|required|integer',
         'idExtendedUser' => 'sometimes|required|integer|exists:extended_user,idExtendedUser',
       ]);
@@ -134,6 +136,7 @@ class PostController extends Controller
         ResponseMessages::RESPONSE_DATA => $post,
       ], 200);
     } catch (\Exception $e) {
+      Log::error($e);
       return response()->json([
         ResponseMessages::RESPONSE_MESSAGE => ResponseMessages::ERROR_UPDATING . $this->resource,
         ResponseMessages::RESPONSE_ERROR => $e->getMessage(),

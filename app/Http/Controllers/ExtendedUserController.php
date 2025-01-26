@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\ExtendedUser;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Role;
+use Illuminate\Support\Facades\Log;
 
 class ExtendedUserController extends Controller
 {
@@ -92,21 +93,14 @@ class ExtendedUserController extends Controller
   }
 
   // Obtener la información extendida de un usuario
-  public function show($idExtendedUser)
+  public function show($id)
   {
     try {
       // Encuentra el registro de ExtendedUser por ID
-      $extendedUser = ExtendedUser::where('idExtendedUser', $idExtendedUser)->first();
+      $data = ExtendedUser::where('id', $id)->first();
 
-      if (!$extendedUser) {
-        return response()->json([
-          ResponseMessages::RESPONSE_MESSAGE => ResponseMessages::EXTENDED_USER_DATA_NOT_FOUND . $idExtendedUser,
-        ], 404);
-      }
-      return response()->json([
-        ResponseMessages::RESPONSE_MESSAGE => ResponseMessages::SUCCESS_FETCHED . $this->resource,
-        ResponseMessages::RESPONSE_DATA => $extendedUser,
-      ], 200);
+      Log::debug($data);
+      return response()->json($data, 200);
     } catch (\Exception $e) {
       return response()->json([
         ResponseMessages::RESPONSE_MESSAGE => ResponseMessages::ERROR_FETCHING . $this->resource,

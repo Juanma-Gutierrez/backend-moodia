@@ -15,10 +15,12 @@ return new class extends Migration
             $table->id('idPost');
             $table->string('title', 255);
             $table->text('message');
-            $table->date('creationDate');
             $table->integer('score');
             $table->unsignedBigInteger('idExtendedUser');
-            $table->foreign('idExtendedUser')->references('idExtendedUser')->on('extended_user');
+            $table->foreign('idExtendedUser')
+            ->references('idExtendedUser')
+            ->on('extended_user')
+            ->onDelete('cascade');
             $table->timestamps();
         });
     }

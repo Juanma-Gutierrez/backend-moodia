@@ -27,7 +27,7 @@ Route::group([
 ], function ($router) {
   Route::post('/create', [ExtendedUserController::class, 'create'])->name('extended_user.create');
   Route::post('/update', [ExtendedUserController::class, 'update'])->name('extended_user.update');
-  Route::post('/{id}', [ExtendedUserController::class, 'show'])->name('extended_user.show');
+  Route::post('/{id}', [ExtendedUserController::class, 'show'])->middleware('auth:api')->name('extended_user.show');
   Route::post('/getRole/{id}', [ExtendedUserController::class, 'getRole'])->name('extended_user.getRole');
 });
 
@@ -68,7 +68,7 @@ Route::group([
   'middleware' => 'auth:api',
   'prefix' => 'post'
 ], function ($router) {
-  Route::get('/list', [PostController::class, 'index'])->name('post.list');
+  Route::get('/list', [PostController::class, 'list'])->name('post.list');
   Route::post('/create', [PostController::class, 'store'])->name('post.create');
   Route::get('/show/{id}', [PostController::class, 'show'])->name('post.show');
   Route::put('/update/{id}', [PostController::class, 'update'])->name('post.update');
@@ -79,6 +79,7 @@ Route::group([
 // Este era el código con el que obtenía todos los posts
 //     $posts = Post::all();
 // return response()->json($posts);
+
 Route::group([
   'middleware' => ['auth:api', 'role:Administrador'],
   'prefix' => 'post'

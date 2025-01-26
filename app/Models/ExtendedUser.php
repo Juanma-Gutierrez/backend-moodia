@@ -21,6 +21,8 @@ class ExtendedUser extends Model
     'idGenre',
     'idRole',
     'idEmployment',
+    'idInspiringPhrase',
+    'id',
   ];
 
   // Si no se usan los campos de timestamps (created_at y updated_at), se puede desactivar
@@ -28,6 +30,6 @@ class ExtendedUser extends Model
 
   public function role()
   {
-      return $this->belongsTo(Role::class, 'idRole', 'idRole');  // 'idRole' es la clave foránea en extended_user
+    return $this->belongsTo(Role::class, 'idRole', 'idRole');
   }
 }
