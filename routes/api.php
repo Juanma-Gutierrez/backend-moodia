@@ -7,6 +7,7 @@ use App\Http\Controllers\EmploymentController;
 use App\Http\Controllers\ExtendedUserController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\InspiringPhraseController;
 use App\Http\Controllers\PostController;
 
 // Rutas para Login y Registro
@@ -70,7 +71,7 @@ Route::group([
 ], function ($router) {
   Route::get('/list', [PostController::class, 'list'])->name('post.list');
   Route::post('/create', [PostController::class, 'store'])->name('post.create');
-  Route::get('/show/{id}', [PostController::class, 'show'])->name('post.show');
+  Route::get('/get/{id}', [PostController::class, 'get'])->name('post.get');
   Route::put('/update/{id}', [PostController::class, 'update'])->name('post.update');
   Route::delete('/delete/{id}', [PostController::class, 'destroy'])->name('post.delete');
 });
@@ -85,4 +86,11 @@ Route::group([
   'prefix' => 'post'
 ], function ($router) {
   Route::get('/admin/all', [PostController::class, 'getAllPosts'])->name('post.admin.all');
+});
+
+// Rutas para InspiringPhrase
+Route::group([
+  'prefix' => 'inspiring_phrase'
+], function ($router) {
+  Route::post('/get', [InspiringPhraseController::class, 'get'])->name('inspiringPhrase.get');
 });

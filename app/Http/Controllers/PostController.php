@@ -84,7 +84,7 @@ class PostController extends Controller
   /**
    * Muestra un post específico.
    */
-  public function show($id)
+  public function get($id)
   {
     try {
       $post = Post::find($id);
