@@ -8,6 +8,7 @@ use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
 use App\Constants\ResponseMessages;
 use App\Models\HasCategory;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
@@ -20,14 +21,11 @@ class PostController extends Controller
   {
     try {
       $user = Auth::user();
-      Log::debug("ENTRA***");
       if (!$user) {
-        Log::debug("NO HAY USUARIO ***");
         return response()->json([
           ResponseMessages::RESPONSE_MESSAGE => ResponseMessages::ERROR_AUTHENTICATION,
         ], 401);
       }
-      Log::debug("DEVUELVE POSTS ***");
 
       $posts = Post::where('idExtendedUser', $user->id)
         ->with('categories:idCategory')
@@ -51,7 +49,6 @@ class PostController extends Controller
    */
   public function store(Request $request)
   {
-    Log::debug($request);
     try {
       $validatedData = $request->validate([
         'title' => 'required|string|max:255',
@@ -114,33 +111,83 @@ class PostController extends Controller
    */
   public function update(Request $request, $id)
   {
+    DB::beginTransaction();
     try {
-      $post = Post::find($id);
-      if (!$post) {
-        return response()->json([
-          ResponseMessages::RESPONSE_MESSAGE => ResponseMessages::POST_NOT_FOUND,
-        ], 404);
-      }
-
-      $validatedData = $request->validate([
-        'title' => 'sometimes|required|string|max:255',
-        'message' => 'sometimes|required|string',
-        'score' => 'sometimes|required|integer',
-        'idExtendedUser' => 'sometimes|required|integer|exists:extended_user,idExtendedUser',
-      ]);
-
-      $post->update($validatedData);
-
+      $this->updatePost($request, $id);
+      $this->deleteCategories($id);
+      $this->storeCategories($request, $id);
+      DB::commit();
       return response()->json([
-        ResponseMessages::RESPONSE_MESSAGE => ResponseMessages::SUCCESS_UPDATED . $this->resource,
-        ResponseMessages::RESPONSE_DATA => $post,
+        ResponseMessages::RESPONSE_MESSAGE => ResponseMessages::SUCCESS_UPDATED . ' post + categories',
+        ResponseMessages::RESPONSE_DATA => $request,
       ], 200);
     } catch (\Exception $e) {
+      DB::rollBack();
       Log::error($e);
       return response()->json([
         ResponseMessages::RESPONSE_MESSAGE => ResponseMessages::ERROR_UPDATING . $this->resource,
         ResponseMessages::RESPONSE_ERROR => $e->getMessage(),
       ], 500);
+    }
+  }
+
+  /**
+   * Actualiza un post específico.
+   */
+  private function updatePost(Request $request, $id)
+  {
+    $post = Post::find($id);
+    if (!$post) {
+      return response()->json([
+        ResponseMessages::RESPONSE_MESSAGE => ResponseMessages::POST_NOT_FOUND,
+      ], 404);
+    }
+
+    $validatedData = $request->validate([
+      'title' => 'sometimes|required|string|max:255',
+      'message' => 'sometimes|required|string',
+      'score' => 'sometimes|required|integer',
+      'idExtendedUser' => 'sometimes|required|integer|exists:extended_user,idExtendedUser',
+    ]);
+
+    $post->update($validatedData);
+
+    return response()->json([
+      ResponseMessages::RESPONSE_MESSAGE => ResponseMessages::SUCCESS_UPDATED . $this->resource,
+      ResponseMessages::RESPONSE_DATA => $post,
+    ], 200);
+  }
+
+  /**
+   * Elimina todas las categorías de un post específico.
+   */
+  private function deleteCategories($id)
+  {
+    HasCategory::where('idPost', $id)->delete();
+  }
+
+  /**
+   * Almacena las categorías de un post específico.
+   */
+  public function storeCategories(Request $request, $idPost)
+  {
+    $validatedData = $request->validate([
+      'title' => 'required|string|max:255',
+      'message' => 'required|string',
+      'score' => 'required|integer',
+      'idExtendedUser' => 'required|integer|exists:extended_user,idExtendedUser',
+      'category' => 'nullable|array',
+    ]);
+
+    foreach ($validatedData['category'] as $category) {
+      $idCategory = $category['idCategory'];
+      Log::debug("Category ID: " . $idCategory);
+      HasCategory::create([
+        'idCategory' => $idCategory,
+        'idPost' => $idPost,
+        'created_at' => now(),
+        'updated_at' => now(),
+      ]);
     }
   }
 
