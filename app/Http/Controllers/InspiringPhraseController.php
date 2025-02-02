@@ -18,14 +18,42 @@ class InspiringPhraseController extends Controller
    * @param int $id
    * @return JsonResponse
    */
-  public function get(): JsonResponse
+  public function getAll(): JsonResponse
   {
     try {
-      $phrase = InspiringPhrase::all();
+      $phrases = InspiringPhrase::all();
+
+      if (!$phrases) {
+        return response()->json([
+          ResponseMessages::RESPONSE_MESSAGE => ResponseMessages::ERROR_FETCHING . $this->resource,
+        ], 404);
+      }
+
+      return response()->json([
+        ResponseMessages::RESPONSE_MESSAGE => ResponseMessages::SUCCESS_FETCHED . $this->resource,
+        ResponseMessages::RESPONSE_DATA => $phrases,
+      ], 200);
+    } catch (\Exception $e) {
+      return response()->json([
+        ResponseMessages::RESPONSE_MESSAGE => ResponseMessages::ERROR_FETCHING . $this->resource,
+        ResponseMessages::RESPONSE_ERROR => $e->getMessage(),
+      ], 500);
+    }
+  }
+  /**
+   * Obtener una frase específica por su ID.
+   *
+   * @param int $idInspiringphrase
+   * @return JsonResponse
+   */
+  public function get(int $idInspiringphrase): JsonResponse
+  {
+    try {
+      $phrase = InspiringPhrase::find($idInspiringphrase);
 
       if (!$phrase) {
         return response()->json([
-          ResponseMessages::RESPONSE_MESSAGE => ResponseMessages::ERROR_FETCHING . $this->resource,
+          ResponseMessages::RESPONSE_MESSAGE => ResponseMessages::ERROR_NOT_FOUND . $this->resource,
         ], 404);
       }
 

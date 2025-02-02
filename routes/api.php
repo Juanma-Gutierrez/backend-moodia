@@ -92,5 +92,6 @@ Route::group([
 Route::group([
   'prefix' => 'inspiring_phrase'
 ], function ($router) {
-  Route::post('/get', [InspiringPhraseController::class, 'get'])->name('inspiringPhrase.get');
+  Route::post('/get', [InspiringPhraseController::class, 'getAll'])->name('inspiringPhrase.all');
+  Route::post('/get/{id}', [InspiringPhraseController::class, 'get'])->name('inspiringPhrase.get');
 });

@@ -21,6 +21,7 @@ class PostController extends Controller
   {
     try {
       $user = Auth::user();
+
       if (!$user) {
         return response()->json([
           ResponseMessages::RESPONSE_MESSAGE => ResponseMessages::ERROR_AUTHENTICATION,
@@ -31,6 +32,12 @@ class PostController extends Controller
         ->with('categories:idCategory')
         ->orderBy('created_at', 'desc')
         ->get();
+
+      if (!$posts) {
+        return response()->json([
+          ResponseMessages::RESPONSE_MESSAGE => ResponseMessages::ERROR_NOT_FOUND . $this->resource,
+        ], 404);
+      }
 
       return response()->json([
         ResponseMessages::RESPONSE_MESSAGE => ResponseMessages::SUCCESS_FETCHED . $this->resource,
@@ -60,6 +67,12 @@ class PostController extends Controller
 
       $post = Post::create($validatedData);
 
+      if (!$post) {
+        return response()->json([
+          ResponseMessages::RESPONSE_MESSAGE => ResponseMessages::ERROR_NOT_FOUND . $this->resource,
+        ], 404);
+      }
+
       foreach ($validatedData['category'] as $categoryId) {
         HasCategory::create([
           'idCategory' => $categoryId,
@@ -88,9 +101,10 @@ class PostController extends Controller
   {
     try {
       $post = Post::find($id);
+
       if (!$post) {
         return response()->json([
-          ResponseMessages::RESPONSE_MESSAGE => ResponseMessages::POST_NOT_FOUND,
+          ResponseMessages::RESPONSE_MESSAGE => ResponseMessages::ERROR_NOT_FOUND . $this->resource,
         ], 404);
       }
 
@@ -137,9 +151,10 @@ class PostController extends Controller
   private function updatePost(Request $request, $id)
   {
     $post = Post::find($id);
+
     if (!$post) {
       return response()->json([
-        ResponseMessages::RESPONSE_MESSAGE => ResponseMessages::POST_NOT_FOUND,
+        ResponseMessages::RESPONSE_MESSAGE => ResponseMessages::ERROR_NOT_FOUND . $this->resource,
       ], 404);
     }
 
@@ -198,9 +213,10 @@ class PostController extends Controller
   {
     try {
       $post = Post::find($id);
+
       if (!$post) {
         return response()->json([
-          ResponseMessages::RESPONSE_MESSAGE => ResponseMessages::POST_NOT_FOUND,
+          ResponseMessages::RESPONSE_MESSAGE => ResponseMessages::ERROR_NOT_FOUND . $this->resource,
         ], 404);
       }
 

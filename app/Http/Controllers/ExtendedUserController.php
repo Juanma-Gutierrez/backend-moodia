@@ -96,8 +96,13 @@ class ExtendedUserController extends Controller
   public function show($id)
   {
     try {
-      // Encuentra el registro de ExtendedUser por ID
       $data = ExtendedUser::where('id', $id)->first();
+
+      if (!$data) {
+        return response()->json([
+          ResponseMessages::RESPONSE_MESSAGE => ResponseMessages::ERROR_NOT_FOUND . $this->resource,
+        ], 404);
+      }
 
       Log::debug($data);
       return response()->json($data, 200);

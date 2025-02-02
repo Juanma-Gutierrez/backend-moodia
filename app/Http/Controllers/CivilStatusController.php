@@ -15,6 +15,13 @@ class CivilStatusController extends Controller
   {
     try {
       $data = CivilStatus::select('idCivilStatus', 'status')->get();
+
+      if (!$data) {
+        return response()->json([
+          ResponseMessages::RESPONSE_MESSAGE => ResponseMessages::ERROR_NOT_FOUND . $this->resource,
+        ], 404);
+      }
+
       return response()->json([
         ResponseMessages::RESPONSE_MESSAGE => ResponseMessages::SUCCESS_FETCHED . $this->resource,
         ResponseMessages::RESPONSE_DATA => $data,

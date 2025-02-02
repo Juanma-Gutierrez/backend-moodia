@@ -96,6 +96,12 @@ class AuthController extends Controller
   {
     $credentials = request(['email', 'password']);
 
+    if (!$credentials) {
+      return response()->json([
+        ResponseMessages::RESPONSE_MESSAGE => ResponseMessages::ERROR_NOT_FOUND . "Login",
+      ], 404);
+    }
+
     if (!$token = auth()->attempt($credentials)) {
       return response()->json([
         ResponseMessages::RESPONSE_ERROR => ResponseMessages::UNAUTHORIZED
