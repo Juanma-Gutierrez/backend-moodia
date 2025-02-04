@@ -57,7 +57,6 @@ class ExtendedUserController extends Controller
   public function update(Request $request)
   {
     $user = Auth::user();
-
     try {
       // Valida los datos de entrada
       $validated = $request->validate([
@@ -67,10 +66,11 @@ class ExtendedUserController extends Controller
         'idGenre' => 'nullable|integer',
         'idRole' => 'nullable|integer',
         'idEmployment' => 'nullable|integer',
+        'idInspiringPhrase' => 'nullable|integer'
       ]);
 
-      // Encuentra el registro de ExtendedUser del usuario autenticado
-      $extendedUser = ExtendedUser::where('idExtendedUser', $user->idExtendedUser)->first();
+      $idExtendedUser = $validated['idExtendedUser'] ?? $user->idExtendedUser;
+      $extendedUser = ExtendedUser::where('idExtendedUser', $idExtendedUser)->first();
 
       if (!$extendedUser) {
         return response()->json([
@@ -78,8 +78,7 @@ class ExtendedUserController extends Controller
         ], 404);
       }
 
-      // Actualiza los campos
-      $extendedUser->update(array_filter($validated));
+      $extendedUser->update($validated);
 
       return response()->json([
         ResponseMessages::RESPONSE_DATA => $extendedUser
@@ -104,7 +103,7 @@ class ExtendedUserController extends Controller
         ], 404);
       }
 
-      Log::debug($data);
+      Log::debug("Respuesta correcta extendedUser: " . $data);
       return response()->json($data, 200);
     } catch (\Exception $e) {
       return response()->json([
