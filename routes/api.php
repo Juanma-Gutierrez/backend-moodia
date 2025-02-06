@@ -1,14 +1,15 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ChallengeController;
 use App\Http\Controllers\CivilStatusController;
 use App\Http\Controllers\EmploymentController;
 use App\Http\Controllers\ExtendedUserController;
 use App\Http\Controllers\GenreController;
-use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\InspiringPhraseController;
 use App\Http\Controllers\PostController;
+use Illuminate\Support\Facades\Route;
 
 // Rutas para Login y Registro
 Route::group([
@@ -37,7 +38,7 @@ Route::group([
   'middleware' => 'api',
   'prefix' => 'genre'
 ], function ($router) {
-  Route::post('/get', [GenreController::class, 'getGenres'])->name('genre.get');
+  Route::post('/get', [GenreController::class, 'getAllGenres'])->name('genre.get');
 });
 
 // Rutas para CivilStatus
@@ -45,7 +46,7 @@ Route::group([
   'middleware' => 'api',
   'prefix' => 'civil_status'
 ], function ($router) {
-  Route::post('/get', [CivilStatusController::class, 'getCivilStatus'])->name('civilStatus.get');
+  Route::post('/get', [CivilStatusController::class, 'getAllCivilStatus'])->name('civilStatus.get');
 });
 
 // Rutas para Employment
@@ -53,7 +54,7 @@ Route::group([
   'middleware' => 'api',
   'prefix' => 'employment'
 ], function ($router) {
-  Route::post('/get', [EmploymentController::class, 'getEmployment'])->name('employment.get');
+  Route::post('/get', [EmploymentController::class, 'getAllEmployments'])->name('employment.get');
 });
 
 // Rutas para Category
@@ -61,8 +62,24 @@ Route::group([
   'middleware' => 'api',
   'prefix' => 'category'
 ], function ($router) {
-  Route::post('/get', [CategoryController::class, 'getCategory'])->name('category.get');
+  Route::post('/get', [CategoryController::class, 'getAllCategories'])->name('category.get');
 });
+
+// Rutas para Challenge
+Route::group([
+  'prefix' => 'challenge'
+], function ($router) {
+  Route::post('/get', [ChallengeController::class, 'getAllChallenges'])->name('challenge.get');
+});
+
+// Rutas para InspiringPhrase
+Route::group([
+  'prefix' => 'inspiring_phrase'
+], function ($router) {
+  Route::post('/get', [InspiringPhraseController::class, 'getAllInspiringPhrases'])->name('inspiringPhrase.all');
+  Route::post('/get/{id}', [InspiringPhraseController::class, 'get'])->name('inspiringPhrase.get');
+});
+
 
 // Rutas para Post
 Route::group([
@@ -86,12 +103,4 @@ Route::group([
   'prefix' => 'post'
 ], function ($router) {
   Route::get('/admin/all', [PostController::class, 'getAllPosts'])->name('post.admin.all');
-});
-
-// Rutas para InspiringPhrase
-Route::group([
-  'prefix' => 'inspiring_phrase'
-], function ($router) {
-  Route::post('/get', [InspiringPhraseController::class, 'getAll'])->name('inspiringPhrase.all');
-  Route::post('/get/{id}', [InspiringPhraseController::class, 'get'])->name('inspiringPhrase.get');
 });

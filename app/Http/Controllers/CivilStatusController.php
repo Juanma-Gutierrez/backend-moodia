@@ -5,16 +5,15 @@ namespace App\Http\Controllers;
 use App\Constants\ResponseMessages;
 use App\Models\CivilStatus;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class CivilStatusController extends Controller
 {
   protected $resource = "civil status";
 
-  public function getCivilStatus(Request $request): JsonResponse
+  public function getAllCivilStatus(): JsonResponse
   {
     try {
-      $data = CivilStatus::select('idCivilStatus', 'status')->get();
+      $data = CivilStatus::all();
 
       if (!$data) {
         return response()->json([

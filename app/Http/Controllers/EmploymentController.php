@@ -5,16 +5,15 @@ namespace App\Http\Controllers;
 use App\Constants\ResponseMessages;
 use App\Models\Employment;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class EmploymentController extends Controller
 {
   protected $resource = "employment";
 
-  public function getEmployment(Request $request): JsonResponse
+  public function getAllEmployments(): JsonResponse
   {
     try {
-      $data = Employment::select('idEmployment', 'employment')->get();
+      $data = Employment::all();
 
       if (!$data) {
         return response()->json([

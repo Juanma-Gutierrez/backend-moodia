@@ -18,7 +18,7 @@ class InspiringPhraseController extends Controller
    * @param int $id
    * @return JsonResponse
    */
-  public function getAll(): JsonResponse
+  public function getAllInspiringPhrases(): JsonResponse
   {
     try {
       $phrases = InspiringPhrase::all();

@@ -3,19 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Constants\ResponseMessages;
-use App\Models\Category;
+use App\Models\Challenge;
 use Illuminate\Http\JsonResponse;
 
-class CategoryController extends Controller
+class ChallengeController extends Controller
 {
-  protected $resource = "category";
+  protected $resource = "challenge";
 
-  public function getAllCategories(): JsonResponse
+  public function getAllChallenges(): JsonResponse
   {
     try {
-      $data = Category::all();
+      $data = Challenge::all();
 
-      if (!$data) {
+      if ($data->isEmpty()) {
         return response()->json([
           ResponseMessages::RESPONSE_MESSAGE => ResponseMessages::ERROR_NOT_FOUND . $this->resource,
         ], 404);

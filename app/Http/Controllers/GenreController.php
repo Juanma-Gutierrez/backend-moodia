@@ -5,16 +5,15 @@ namespace App\Http\Controllers;
 use App\Constants\ResponseMessages;
 use App\Models\Genre;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class GenreController extends Controller
 {
   protected $resource = "genre";
 
-  public function getGenres(Request $request): JsonResponse
+  public function getAllGenres(): JsonResponse
   {
     try {
-      $data = Genre::select('idGenre', 'genre')->get();
+      $data = Genre::all();
 
       if (!$data) {
         return response()->json([
