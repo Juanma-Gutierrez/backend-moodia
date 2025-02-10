@@ -9,6 +9,7 @@ use App\Http\Controllers\ExtendedUserController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\InspiringPhraseController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 // Rutas para Login y Registro
@@ -103,4 +104,14 @@ Route::group([
   'prefix' => 'post'
 ], function ($router) {
   Route::get('/admin/all', [PostController::class, 'getAllPosts'])->name('post.admin.all');
+});
+
+// Route::get('/user/average-score', [UserController::class, 'getUsersWithAvgScores']);
+
+
+Route::group([
+  'middleware' => ['auth:api'],
+  'prefix' => 'user'
+], function ($router) {
+  Route::post('/get-all', [UserController::class, 'getUsersWithAvgScores']);
 });

@@ -32,4 +32,19 @@ class ExtendedUser extends Model
   {
     return $this->belongsTo(Role::class, 'idRole', 'idRole');
   }
+
+  public function genre()
+  {
+    return $this->belongsTo(Genre::class, 'idGenre', 'idGenre');
+  }
+
+  public function employment()
+  {
+    return $this->belongsTo(Employment::class, 'idEmployment', 'idEmployment');
+  }
+
+  public function civilStatus()
+  {
+    return $this->belongsTo(CivilStatus::class, 'idCivilStatus', 'idCivilStatus');
+  }
 }

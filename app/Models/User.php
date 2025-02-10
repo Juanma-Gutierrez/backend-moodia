@@ -9,54 +9,68 @@ use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
 {
-    use Notifiable;
+  use Notifiable;
 
-/**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */protected $fillable = [
-        'name',
-        'email',
-        'password',
+  /**
+   * The attributes that are mass assignable.
+   *
+   * @var array<int, string>
+   */ protected $fillable = [
+    'name',
+    'email',
+    'password',
+  ];
+
+  /**
+   * The attributes that should be hidden for serialization.
+   *
+   * @var array<int, string>
+   */ protected $hidden = [
+    'password',
+    'remember_token',
+  ];
+
+  /**
+   * Get the attributes that should be cast.
+   *
+   * @return array<string, string>
+   */ protected function casts(): array
+  {
+    return [
+      'email_verified_at' => 'datetime',
+      'password' => 'hashed',
     ];
+  }
 
-/**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+  // Relación con el modelo ExtendedUser
+  public function extendedUser()
+  {
+    return $this->hasOne(ExtendedUser::class, 'id');
+  }
 
-/**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */protected function casts(): array
-    {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
-    }
+  // Relación con los posts a través de ExtendedUser
+  public function posts()
+  {
+    return $this->hasManyThrough(Post::class, ExtendedUser::class, 'id', 'idExtendedUser');
+  }
 
-/**
-     * Get the identifier that will be stored in the subject claim of the JWT.
-     *
-     * @return mixed
-     */public function getJWTIdentifier()
-    {
-        return $this->getKey();
-    }
 
-/**
-     * Return a key value array, containing any custom claims to be added to the JWT.
-     *
-     * @return array
-     */public function getJWTCustomClaims()
-    {
-        return [];
-    }
+
+  /**
+   * Get the identifier that will be stored in the subject claim of the JWT.
+   *
+   * @return mixed
+   */ public function getJWTIdentifier()
+  {
+    return $this->getKey();
+  }
+
+  /**
+   * Return a key value array, containing any custom claims to be added to the JWT.
+   *
+   * @return array
+   */ public function getJWTCustomClaims()
+  {
+    return [];
+  }
 }

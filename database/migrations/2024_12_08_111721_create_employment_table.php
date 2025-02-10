@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('employment', function (Blueprint $table) {
             $table->id('idEmployment');
             $table->string('employment', 100);
-            $table->unsignedBigInteger('idExtendedUser')->nullable();
             $table->timestamps();
         });
     }

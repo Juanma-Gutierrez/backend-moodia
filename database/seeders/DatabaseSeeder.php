@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             ExtendedUserSeeder::class,
             PostSeeder::class,
             InspiringPhraseSeeder::class,
+            ChallengeSeeder::class,
         ]);
     }
 }
