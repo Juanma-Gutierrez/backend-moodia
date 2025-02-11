@@ -314,6 +314,406 @@ class PostSeeder extends Seeder
         'updated_at' => $this->generateRandomDate(),
         'categories' => [],
       ],
+      [
+        'id' => 31,
+        'title' => 'Hoy ha sido un día increíble',
+        'message' => 'He tenido un día espectacular en el trabajo, todo salió bien y me siento muy motivado.',
+        'score' => 5,
+        'idExtendedUser' => 12,
+        'created_at' => $this->generateRandomDate(),
+        'updated_at' => $this->generateRandomDate(),
+        'categories' => [1, 4]
+      ],
+      [
+        'id' => 32,
+        'title' => 'Me siento agotado',
+        'message' => 'Ha sido un día muy largo y complicado. Necesito descansar y desconectar un poco.',
+        'score' => 2,
+        'idExtendedUser' => 27,
+        'created_at' => $this->generateRandomDate(),
+        'updated_at' => $this->generateRandomDate(),
+        'categories' => [2, 5, 7]
+      ],
+      [
+        'id' => 33,
+        'title' => 'Pequeños logros, grandes alegrías',
+        'message' => 'Hoy logré algo que parecía imposible hace un mes. Cada esfuerzo tiene su recompensa.',
+        'score' => 4,
+        'idExtendedUser' => 9,
+        'created_at' => $this->generateRandomDate(),
+        'updated_at' => $this->generateRandomDate(),
+        'categories' => []
+      ],
+      [
+        'id' => 34,
+        'title' => 'No ha sido mi mejor día',
+        'message' => 'Me siento un poco bajo de ánimo, pero sé que mañana será mejor.',
+        'score' => 3,
+        'idExtendedUser' => 14,
+        'created_at' => $this->generateRandomDate(),
+        'updated_at' => $this->generateRandomDate(),
+        'categories' => [6]
+      ],
+      [
+        'id' => 35,
+        'title' => 'Reflexiones sobre el futuro',
+        'message' => 'Hoy estuve pensando mucho en los próximos pasos de mi vida. Hay tantas opciones que me cuesta decidir.',
+        'score' => 3,
+        'idExtendedUser' => 6,
+        'created_at' => $this->generateRandomDate(),
+        'updated_at' => $this->generateRandomDate(),
+        'categories' => [3, 7]
+      ],
+      [
+        'id' => 36,
+        'title' => 'Un día difícil',
+        'message' => 'Hoy tuve muchas dificultades en el trabajo. Me siento frustrado, pero sé que podré superarlo.',
+        'score' => 2,
+        'idExtendedUser' => 17,
+        'created_at' => $this->generateRandomDate(),
+        'updated_at' => $this->generateRandomDate(),
+        'categories' => [5]
+      ],
+      [
+        'id' => 37,
+        'title' => 'Logré terminar mi proyecto',
+        'message' => 'Después de semanas de trabajo, finalmente terminé mi proyecto. Me siento muy satisfecho.',
+        'score' => 5,
+        'idExtendedUser' => 11,
+        'created_at' => $this->generateRandomDate(),
+        'updated_at' => $this->generateRandomDate(),
+        'categories' => [1, 3, 4]
+      ],
+      [
+        'id' => 38,
+        'title' => 'Necesito un cambio',
+        'message' => 'Hoy sentí que necesito hacer cambios en mi vida. Tal vez sea el momento de tomar nuevas decisiones.',
+        'score' => 3,
+        'idExtendedUser' => 25,
+        'created_at' => $this->generateRandomDate(),
+        'updated_at' => $this->generateRandomDate(),
+        'categories' => []
+      ],
+      [
+        'id' => 39,
+        'title' => 'Un día relajante',
+        'message' => 'Hoy decidí tomarme el día libre y disfrutar de un buen libro. Fue exactamente lo que necesitaba.',
+        'score' => 4,
+        'idExtendedUser' => 5,
+        'created_at' => $this->generateRandomDate(),
+        'updated_at' => $this->generateRandomDate(),
+        'categories' => [6, 7]
+      ],
+      [
+        'id' => 40,
+        'title' => 'Buenas noticias',
+        'message' => 'Me han dado una gran noticia hoy. No puedo esperar para compartirla con mis amigos y familiares.',
+        'score' => 5,
+        'idExtendedUser' => 19,
+        'created_at' => $this->generateRandomDate(),
+        'updated_at' => $this->generateRandomDate(),
+        'categories' => [1]
+      ],
+      [
+        'id' => 41,
+        'title' => 'Un día de aprendizaje',
+        'message' => 'Hoy aprendí algo nuevo y me siento inspirado. Me encanta descubrir cosas interesantes.',
+        'score' => 4,
+        'idExtendedUser' => 22,
+        'created_at' => $this->generateRandomDate(),
+        'updated_at' => $this->generateRandomDate(),
+        'categories' => [3, 5]
+      ],
+      [
+        'id' => 42,
+        'title' => 'Mucha ansiedad',
+        'message' => 'No he podido concentrarme bien hoy. La ansiedad ha estado presente todo el día.',
+        'score' => 2,
+        'idExtendedUser' => 30,
+        'created_at' => $this->generateRandomDate(),
+        'updated_at' => $this->generateRandomDate(),
+        'categories' => [7]
+      ],
+      [
+        'id' => 43,
+        'title' => 'Sintiéndome optimista',
+        'message' => 'Hoy me siento con muchas ganas de avanzar en mis metas. Todo parece estar alineándose a mi favor.',
+        'score' => 5,
+        'idExtendedUser' => 8,
+        'created_at' => $this->generateRandomDate(),
+        'updated_at' => $this->generateRandomDate(),
+        'categories' => []
+      ],
+      [
+        'id' => 44,
+        'title' => 'Pequeños momentos felices',
+        'message' => 'Hoy disfruté de un buen café y una charla con un amigo. A veces, la felicidad está en los pequeños detalles.',
+        'score' => 4,
+        'idExtendedUser' => 13,
+        'created_at' => $this->generateRandomDate(),
+        'updated_at' => $this->generateRandomDate(),
+        'categories' => [6]
+      ],
+      [
+        'id' => 45,
+        'title' => 'Un día agotador',
+        'message' => 'Estoy exhausto. Necesito descansar bien esta noche para recuperar energía.',
+        'score' => 1,
+        'idExtendedUser' => 26,
+        'created_at' => $this->generateRandomDate(),
+        'updated_at' => $this->generateRandomDate(),
+        'categories' => [5]
+      ],
+      [
+        'id' => 46,
+        'title' => 'Nueva oportunidad',
+        'message' => 'Hoy surgió una oportunidad inesperada que podría cambiar mi rumbo. Veremos qué sucede.',
+        'score' => 4,
+        'idExtendedUser' => 18,
+        'created_at' => $this->generateRandomDate(),
+        'updated_at' => $this->generateRandomDate(),
+        'categories' => [1, 3]
+      ],
+      [
+        'id' => 47,
+        'title' => 'Mucha presión',
+        'message' => 'Hoy sentí mucha presión en el trabajo. Necesito encontrar un mejor equilibrio.',
+        'score' => 1,
+        'idExtendedUser' => 10,
+        'created_at' => $this->generateRandomDate(),
+        'updated_at' => $this->generateRandomDate(),
+        'categories' => [2, 5]
+      ],
+      [
+        'id' => 48,
+        'title' => 'Rodeado de buena energía',
+        'message' => 'Hoy pasé un día increíble con personas que me llenan de energía positiva.',
+        'score' => 5,
+        'idExtendedUser' => 21,
+        'created_at' => $this->generateRandomDate(),
+        'updated_at' => $this->generateRandomDate(),
+        'categories' => [4, 6]
+      ],
+      [
+        'id' => 49,
+        'title' => 'Mejorando poco a poco',
+        'message' => 'A pesar de los días difíciles, siento que estoy avanzando y eso me motiva.',
+        'score' => 2,
+        'idExtendedUser' => 7,
+        'created_at' => $this->generateRandomDate(),
+        'updated_at' => $this->generateRandomDate(),
+        'categories' => []
+      ],
+      [
+        'id' => 50,
+        'title' => 'Hoy no ha sido mi día',
+        'message' => 'No me sentí bien hoy, pero confío en que mañana será mejor.',
+        'score' => 1,
+        'idExtendedUser' => 15,
+        'created_at' => $this->generateRandomDate(),
+        'updated_at' => $this->generateRandomDate(),
+        'categories' => [7]
+      ],
+      [
+        'id' => 51,
+        'title' => 'Día gris',
+        'message' => 'Hoy ha sido un día difícil. No he podido concentrarme en nada.',
+        'score' => 1,
+        'idExtendedUser' => 14,
+        'created_at' => $this->generateRandomDate(),
+        'updated_at' => $this->generateRandomDate(),
+        'categories' => [2, 7]
+      ],
+      [
+        'id' => 52,
+        'title' => 'Sin motivación',
+        'message' => 'No he encontrado inspiración para hacer nada hoy. Espero sentirme mejor mañana.',
+        'score' => 2,
+        'idExtendedUser' => 9,
+        'created_at' => $this->generateRandomDate(),
+        'updated_at' => $this->generateRandomDate(),
+        'categories' => []
+      ],
+      [
+        'id' => 53,
+        'title' => 'Día de frustraciones',
+        'message' => 'Nada salió como esperaba hoy. Me siento agotado mentalmente.',
+        'score' => 1,
+        'idExtendedUser' => 21,
+        'created_at' => $this->generateRandomDate(),
+        'updated_at' => $this->generateRandomDate(),
+        'categories' => [5]
+      ],
+      [
+        'id' => 54,
+        'title' => 'Demasiada presión',
+        'message' => 'Hoy tuve demasiadas responsabilidades. Siento que necesito un descanso.',
+        'score' => 2,
+        'idExtendedUser' => 18,
+        'created_at' => $this->generateRandomDate(),
+        'updated_at' => $this->generateRandomDate(),
+        'categories' => [2, 3]
+      ],
+      [
+        'id' => 55,
+        'title' => 'Nada de energía',
+        'message' => 'Hoy fue un día extremadamente agotador. Solo quiero dormir.',
+        'score' => 1,
+        'idExtendedUser' => 7,
+        'created_at' => $this->generateRandomDate(),
+        'updated_at' => $this->generateRandomDate(),
+        'categories' => []
+      ],
+      [
+        'id' => 56,
+        'title' => 'Problemas y más problemas',
+        'message' => 'No encuentro solución a los problemas de hoy. Espero que mañana sea distinto.',
+        'score' => 2,
+        'idExtendedUser' => 16,
+        'created_at' => $this->generateRandomDate(),
+        'updated_at' => $this->generateRandomDate(),
+        'categories' => [6, 7]
+      ],
+      [
+        'id' => 57,
+        'title' => 'Preocupaciones constantes',
+        'message' => 'Hoy no paré de pensar en cosas negativas. Me costará dormir.',
+        'score' => 1,
+        'idExtendedUser' => 25,
+        'created_at' => $this->generateRandomDate(),
+        'updated_at' => $this->generateRandomDate(),
+        'categories' => [4]
+      ],
+      [
+        'id' => 58,
+        'title' => 'Un día sin propósito',
+        'message' => 'Hoy me sentí completamente desmotivado. No encontré sentido a nada.',
+        'score' => 1,
+        'idExtendedUser' => 11,
+        'created_at' => $this->generateRandomDate(),
+        'updated_at' => $this->generateRandomDate(),
+        'categories' => []
+      ],
+      [
+        'id' => 59,
+        'title' => 'Día muy triste',
+        'message' => 'Hoy me sentí más triste de lo normal. No tengo ganas de hacer nada.',
+        'score' => 1,
+        'idExtendedUser' => 28,
+        'created_at' => $this->generateRandomDate(),
+        'updated_at' => $this->generateRandomDate(),
+        'categories' => [7]
+      ],
+      [
+        'id' => 60,
+        'title' => 'Mal humor todo el día',
+        'message' => 'Todo me molestó hoy. Me siento irritado sin razón aparente.',
+        'score' => 2,
+        'idExtendedUser' => 12,
+        'created_at' => $this->generateRandomDate(),
+        'updated_at' => $this->generateRandomDate(),
+        'categories' => [3]
+      ],
+      [
+        'id' => 61,
+        'title' => 'Cansancio extremo',
+        'message' => 'No pude descansar bien anoche y hoy me costó mucho hacer mis tareas.',
+        'score' => 1,
+        'idExtendedUser' => 22,
+        'created_at' => $this->generateRandomDate(),
+        'updated_at' => $this->generateRandomDate(),
+        'categories' => [2, 5]
+      ],
+      [
+        'id' => 62,
+        'title' => 'Falta de concentración',
+        'message' => 'Hoy intenté trabajar, pero no logré concentrarme en nada.',
+        'score' => 2,
+        'idExtendedUser' => 5,
+        'created_at' => $this->generateRandomDate(),
+        'updated_at' => $this->generateRandomDate(),
+        'categories' => [6]
+      ],
+      [
+        'id' => 63,
+        'title' => 'Mucho estrés',
+        'message' => 'La presión de hoy fue demasiado. No sé cómo voy a manejar todo.',
+        'score' => 1,
+        'idExtendedUser' => 20,
+        'created_at' => $this->generateRandomDate(),
+        'updated_at' => $this->generateRandomDate(),
+        'categories' => [5, 7]
+      ],
+      [
+        'id' => 64,
+        'title' => 'Día sin motivación',
+        'message' => 'Hoy simplemente no tuve ganas de hacer nada.',
+        'score' => 1,
+        'idExtendedUser' => 15,
+        'created_at' => $this->generateRandomDate(),
+        'updated_at' => $this->generateRandomDate(),
+        'categories' => []
+      ],
+      [
+        'id' => 65,
+        'title' => 'Angustia constante',
+        'message' => 'Hoy sentí mucha angustia sin razón aparente.',
+        'score' => 2,
+        'idExtendedUser' => 17,
+        'created_at' => $this->generateRandomDate(),
+        'updated_at' => $this->generateRandomDate(),
+        'categories' => [3, 7]
+      ],
+      [
+        'id' => 66,
+        'title' => 'Día largo y pesado',
+        'message' => 'Cada minuto de hoy se sintió como una eternidad.',
+        'score' => 2,
+        'idExtendedUser' => 6,
+        'created_at' => $this->generateRandomDate(),
+        'updated_at' => $this->generateRandomDate(),
+        'categories' => []
+      ],
+      [
+        'id' => 67,
+        'title' => 'Nada salió bien',
+        'message' => 'Hoy todo fue un desastre. Nada salió como esperaba.',
+        'score' => 1,
+        'idExtendedUser' => 24,
+        'created_at' => $this->generateRandomDate(),
+        'updated_at' => $this->generateRandomDate(),
+        'categories' => [5]
+      ],
+      [
+        'id' => 68,
+        'title' => 'Dolor de cabeza todo el día',
+        'message' => 'Hoy tuve un fuerte dolor de cabeza que no me dejó hacer nada.',
+        'score' => 2,
+        'idExtendedUser' => 29,
+        'created_at' => $this->generateRandomDate(),
+        'updated_at' => $this->generateRandomDate(),
+        'categories' => [2]
+      ],
+      [
+        'id' => 69,
+        'title' => 'No sé qué hacer',
+        'message' => 'Hoy me siento perdido, sin rumbo claro.',
+        'score' => 1,
+        'idExtendedUser' => 23,
+        'created_at' => $this->generateRandomDate(),
+        'updated_at' => $this->generateRandomDate(),
+        'categories' => []
+      ],
+      [
+        'id' => 70,
+        'title' => 'Un día más sin novedades',
+        'message' => 'Hoy fue un día aburrido, sin nada interesante.',
+        'score' => 3,
+        'idExtendedUser' => 10,
+        'created_at' => $this->generateRandomDate(),
+        'updated_at' => $this->generateRandomDate(),
+        'categories' => [6]
+      ]
     ];
 
     // Insertar los posts en la tabla `post`
