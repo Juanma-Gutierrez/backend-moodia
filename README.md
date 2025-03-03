@@ -30,11 +30,10 @@ El backend de **Moodia** está desarrollado en **Laravel 11**, un framework PHP 
 <img src="https://github.com/user-attachments/assets/9feb6d5f-a7bc-49a6-895b-f7c200abea7c" width="800px">
 
 ## Capturas de pantalla de la aplicación en formato móvil
-<br/>
+
 <img src="https://github.com/user-attachments/assets/c79a5c43-5235-4b48-8ff7-b26ccf8820a8" width="300px">
 <img src="https://github.com/user-attachments/assets/62320da4-b8b1-4ec5-86a9-d2be882d9d85" width="300px">
 <img src="https://github.com/user-attachments/assets/e3b01dd5-ca03-4735-9566-2588db1e5332" width="300px">
-<br/>
 <img src="https://github.com/user-attachments/assets/fb952cf8-9a17-4dde-956f-8c90093d95ac" width="300px">
 <img src="https://github.com/user-attachments/assets/e13fe26c-bd12-4637-b03d-fda140e1f633" width="300px">
 <img src="https://github.com/user-attachments/assets/265f1f48-9834-493f-b7c1-c4535ae89717" width="300px">
